@@ -12,7 +12,7 @@ export function Hero() {
           style={{ backgroundImage: 'url("/background/setup_techforge.png")' }}
         ></div>
         <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/30 via-brand-dark/50 to-brand-dark"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/50 to-transparent"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -50,7 +50,7 @@ export function Hero() {
               Fazer Orçamento
             </a>
             <a
-              href="#services"
+              href="#gallery"
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-8 rounded-lg transition-colors text-lg inline-flex justify-center items-center"
             >
               Nossos Serviços

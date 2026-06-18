@@ -11,20 +11,20 @@ export function Gallery() {
   ];
 
   return (
-    <section id="gallery" className="py-24 bg-brand-dark relative overflow-hidden">
+    <section id="gallery" className="py-12 bg-brand-dark relative overflow-hidden">
       <Embers />
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Nossos <span className="text-brand-red">Serviços</span></h2>
           <p className="text-gray-400 max-w-2xl mx-auto">Confira um pouco do nosso dia a dia na bancada da Tech Forge.</p>
         </div>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {images.map((img, idx) => (
             <div key={idx} className="group relative overflow-hidden rounded-xl aspect-[4/3] bg-brand-gray">
-              <img 
-                src={img.src} 
-                alt={img.alt} 
+              <img
+                src={img.src}
+                alt={img.alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">

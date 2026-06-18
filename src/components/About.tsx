@@ -20,7 +20,7 @@ export function About() {
   ];
 
   return (
-    <section id="about" className="py-24 bg-brand-gray relative">
+    <section id="about" className="py-12 bg-brand-gray relative">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row gap-12 items-center">
           <div className="md:w-1/2">
@@ -32,7 +32,7 @@ export function About() {
               Com anos de experiência no mercado de hardware e software, nossa assistência técnica é referência em montagem de PCs gamers, reparos em placas-mãe de notebooks e otimização de sistemas.
             </p>
           </div>
-          
+
           <div className="md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
             {features.map((feature, index) => (
               <div key={index} className="bg-brand-dark p-6 rounded-xl border border-white/5 hover:border-brand-red/30 transition-colors">

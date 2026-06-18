@@ -38,8 +38,10 @@ export function Navbar() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
+      // Offset de 100px para o menu fixo não cobrir o título
+      const offset = id === 'hero' ? 0 : 100;
       window.scrollTo({
-        top: element.offsetTop,
+        top: element.offsetTop - offset,
         behavior: 'smooth',
       });
     }
