@@ -1,3 +1,5 @@
+import { Embers } from './Embers';
+
 export function Gallery() {
   const images = [
     { src: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Manutenção de PC Gamer' },
@@ -9,8 +11,9 @@ export function Gallery() {
   ];
 
   return (
-    <section id="gallery" className="py-24 bg-brand-dark">
-      <div className="container mx-auto px-6">
+    <section id="gallery" className="py-24 bg-brand-dark relative overflow-hidden">
+      <Embers />
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Nossos <span className="text-brand-red">Serviços</span></h2>
           <p className="text-gray-400 max-w-2xl mx-auto">Confira um pouco do nosso dia a dia na bancada da Tech Forge.</p>
