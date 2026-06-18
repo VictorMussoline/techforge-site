@@ -12,7 +12,15 @@ export function Footer() {
         <div className="text-gray-500 text-sm text-center">
           <p>&copy; {currentYear} Tech Forge. Todos os direitos reservados.</p>
           <p className="mt-1">
-            Desenvolvido por <span className="text-white font-medium">Victor Mussoline</span>
+            Desenvolvido por{' '}
+            <a 
+              href="https://www.linkedin.com/in/victormussoline/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-brand-red font-bold transition-all duration-300 hover:text-white drop-shadow-[0_0_12px_rgba(220,38,38,0.6)] hover:drop-shadow-[0_0_20px_rgba(220,38,38,1)]"
+            >
+              Victor Mussoline
+            </a>
           </p>
         </div>
       </div>
