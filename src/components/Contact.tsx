@@ -15,7 +15,14 @@ export function Contact() {
               <MapPin className="text-brand-red shrink-0" size={24} />
               <div>
                 <h4 className="font-bold mb-1">Localização</h4>
-                <p className="text-gray-400 text-sm">R. Dr. Altíno Arantes, 1200 - Parque Universitario<br/>Franca - SP, 14404-614</p>
+                <a 
+                  href="https://www.google.com/maps/place/TechForge/@-20.5718785,-47.4057517,19z/data=!3m1!4b1!4m6!3m5!1s0x94b0a9d4e80510fd:0xc357bc32cb32559a!8m2!3d-20.5718785!4d-47.405108!16s%2Fg%2F11n55tgbz5?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  className="text-gray-400 text-sm hover:text-brand-red transition-colors"
+                >
+                  R. Dr. Altíno Arantes, 1200 - Parque Universitario<br/>Franca - SP, 14404-614
+                </a>
               </div>
             </div>
             
@@ -48,7 +55,7 @@ export function Contact() {
             {/* Mock Google Map - can be replaced with real iframe */}
             <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
                <iframe 
-                  src="https://maps.google.com/maps?q=Rua%20Dr%20Altino%20Arantes%201200%20Franca%20SP&hl=pt-BR&z=17&output=embed" 
+                  src="https://maps.google.com/maps?q=TechForge,%20Rua%20Dr.%20Alt%C3%ADno%20Arantes,%201200%20-%20Franca%20-%20SP&hl=pt-BR&z=17&output=embed" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) contrast(100%)' }} 
