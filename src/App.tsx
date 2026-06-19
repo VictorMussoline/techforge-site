@@ -6,7 +6,6 @@ import { Gallery } from './components/Gallery';
 import { Reviews } from './components/Reviews';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { Embers } from './components/Embers';
 
 function App() {
   return (
@@ -19,7 +18,7 @@ function App() {
         <meta property="og:description" content="Assistência Técnica Especializada em PCs & Notebooks. A TechForge resolve seus problemas com qualidade e rapidez." />
         <meta property="og:type" content="website" />
       </Helmet>
-      
+
       <Navbar />
       <main className="flex-1 w-full">
         <Hero />
