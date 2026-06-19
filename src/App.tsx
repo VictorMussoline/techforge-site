@@ -12,11 +12,11 @@ function App() {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-brand-dark text-white font-sans relative">
       <Helmet>
-        <title>Tech Forge | Assistência Técnica Especializada</title>
-        <meta name="description" content="Assistência Técnica Especializada em PCs & Notebooks. A Tech Forge resolve seus problemas com qualidade e rapidez." />
+        <title>TechForge | Assistência Técnica Especializada</title>
+        <meta name="description" content="Assistência Técnica Especializada em PCs & Notebooks. A TechForge resolve seus problemas com qualidade e rapidez." />
         <meta name="keywords" content="assistência técnica, manutenção de computadores, conserto de notebook, pc gamer, são paulo" />
-        <meta property="og:title" content="Tech Forge | Assistência Técnica Especializada" />
-        <meta property="og:description" content="Assistência Técnica Especializada em PCs & Notebooks. A Tech Forge resolve seus problemas com qualidade e rapidez." />
+        <meta property="og:title" content="TechForge | Assistência Técnica Especializada" />
+        <meta property="og:description" content="Assistência Técnica Especializada em PCs & Notebooks. A TechForge resolve seus problemas com qualidade e rapidez." />
         <meta property="og:type" content="website" />
       </Helmet>
       

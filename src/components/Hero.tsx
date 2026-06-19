@@ -33,7 +33,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl">
-              Assistência Técnica Especializada em PCs e Notebooks. A Tech Forge resolve seus problemas com qualidade, agilidade e transparência.
+              Assistência Técnica Especializada em PCs e Notebooks. A <span className="text-white">Tech</span><span className="text-brand-red">Forge</span> resolve seus problemas com qualidade, agilidade e transparência.
             </p>
           </motion.div>
 

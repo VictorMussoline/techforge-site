@@ -55,7 +55,7 @@ export function Navbar() {
         scrolled ? "max-w-4xl shadow-2xl" : "max-w-5xl shadow-xl"
       )}>
         <div className="flex items-center gap-3">
-          <img src="/Logo.png" alt="Tech Forge" className="h-8 object-contain" />
+          <img src="/Logo.png" alt="TechForge" className="h-8 object-contain" />
           <span className="font-bold tracking-tighter text-xl text-white">TECH<span className="text-brand-red">FORGE</span></span>
         </div>
         

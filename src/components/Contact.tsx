@@ -260,7 +260,7 @@ export function Contact() {
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Localização Tech Forge"
+              title="Localização TechForge"
             ></iframe>
           </InteractiveMapCard>
         </div>
