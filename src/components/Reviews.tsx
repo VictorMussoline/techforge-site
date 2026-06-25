@@ -1,5 +1,6 @@
 import { Star } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 // ==========================================
 // ⭐️ AVALIAÇÕES DOS CLIENTES
@@ -50,8 +51,37 @@ function ReviewCard({ review }: { review: typeof REVIEWS_DATA[0] }) {
   const [opacity, setOpacity] = useState(0);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    setIsTouch(mediaQuery.matches);
+    const handler = (e: MediaQueryListEvent) => setIsTouch(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  const entry = useIntersectionObserver(divRef, {
+    threshold: 0.6,
+    rootMargin: '-10% 0px -10% 0px',
+  });
+  
+  const isIntersecting = !!entry?.isIntersecting;
+
+  useEffect(() => {
+    if (isTouch) {
+      if (isIntersecting && divRef.current) {
+        const rect = divRef.current.getBoundingClientRect();
+        setPosition({ x: rect.width / 2, y: rect.height / 2 });
+        setOpacity(1);
+      } else {
+        setOpacity(0);
+      }
+    }
+  }, [isTouch, isIntersecting]);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (!divRef.current || isFocused) return;
+    if (isTouch || !divRef.current || isFocused) return;
     const rect = divRef.current.getBoundingClientRect();
 
     // Coordenadas para o Glow
@@ -71,11 +101,13 @@ function ReviewCard({ review }: { review: typeof REVIEWS_DATA[0] }) {
   };
 
   const handleFocus = () => { setIsFocused(true); setOpacity(1); };
-  const handleBlur = () => { setIsFocused(false); setOpacity(0); setRotation({ x: 0, y: 0 }); };
-  const handleMouseEnter = () => { setOpacity(1); };
+  const handleBlur = () => { setIsFocused(false); if (!isIntersecting) setOpacity(0); setRotation({ x: 0, y: 0 }); };
+  const handleMouseEnter = () => { if (!isTouch) setOpacity(1); };
   const handleMouseLeave = () => {
-    setOpacity(0);
-    setRotation({ x: 0, y: 0 }); // Reseta o card quando o mouse sai
+    if (!isTouch) {
+      setOpacity(0);
+      setRotation({ x: 0, y: 0 }); // Reseta o card quando o mouse sai
+    }
   };
 
   const CardWrapper = review.review_url ? 'a' : 'div';

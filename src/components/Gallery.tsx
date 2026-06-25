@@ -1,5 +1,6 @@
 import { Embers } from './Embers';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { X, CheckCircle2, ChevronRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -13,13 +14,37 @@ type ServiceType = {
 function GalleryCard({ item, onClick }: { item: ServiceType, onClick: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const divRef = useRef<HTMLDivElement>(null);
+  
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    setIsTouch(mediaQuery.matches);
+    const handler = (e: MediaQueryListEvent) => setIsTouch(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  const entry = useIntersectionObserver(divRef, {
+    threshold: 0.6,
+    rootMargin: '-10% 0px -10% 0px',
+  });
+  
+  const isIntersecting = !!entry?.isIntersecting;
+  
+  useEffect(() => {
+    if (isTouch) {
+      setIsHovered(isIntersecting);
+    }
+  }, [isTouch, isIntersecting]);
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
     if (isHovered) {
       interval = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % item.images.length);
-      }, 1000); // Muda a imagem a cada 1 segundo
+      }, 2500); // Muda a imagem a cada 2.5 segundos
     } else {
       setCurrentIndex(0); // Reseta para a primeira imagem ao tirar o mouse
     }
@@ -31,9 +56,10 @@ function GalleryCard({ item, onClick }: { item: ServiceType, onClick: () => void
 
   return (
     <div
-      className="group relative overflow-hidden rounded-xl aspect-[4/3] bg-brand-gray cursor-pointer transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-red/20"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      ref={divRef}
+      className={`relative overflow-hidden rounded-xl aspect-[4/3] bg-brand-gray cursor-pointer transform transition-transform duration-300 ${isHovered ? '-translate-y-2 shadow-2xl shadow-brand-red/20' : ''}`}
+      onMouseEnter={() => { if (!isTouch) setIsHovered(true); }}
+      onMouseLeave={() => { if (!isTouch) setIsHovered(false); }}
       onClick={onClick}
     >
       {item.images.map((src, idx) => (
@@ -42,16 +68,16 @@ function GalleryCard({ item, onClick }: { item: ServiceType, onClick: () => void
           src={src}
           alt={`${item.title} - ${idx + 1}`}
           className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${idx === currentIndex
-            ? 'opacity-80 group-hover:opacity-100 group-hover:scale-110 z-10'
+            ? `opacity-80 z-10 ${isHovered ? 'opacity-100 scale-110' : ''}`
             : 'opacity-0 scale-100 z-0'
             }`}
         />
       ))}
-      <div className="absolute inset-0 z-20 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
+      <div className={`absolute inset-0 z-20 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent transition-opacity duration-300 ${isHovered ? 'opacity-90' : 'opacity-60'}`} />
       
       <div className="absolute inset-0 z-30 flex flex-col justify-end p-6">
-        <span className="text-white font-bold text-xl mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{item.title}</span>
-        <span className="text-brand-red font-semibold flex items-center gap-1 text-sm opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
+        <span className={`text-white font-bold text-xl mb-1 transition-transform duration-300 ${isHovered ? 'translate-y-0' : 'translate-y-4'}`}>{item.title}</span>
+        <span className={`text-brand-red font-semibold flex items-center gap-1 text-sm transition-all duration-300 delay-75 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           Ver detalhes <ChevronRight className="w-4 h-4" />
         </span>
       </div>

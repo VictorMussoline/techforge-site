@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Home, Info, Wrench, MessageSquare, Phone } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '../utils/cn';
 
 const navItems = [
@@ -89,27 +90,35 @@ export function Navbar() {
       </div>
 
       {/* Mobile Menu Dropdown (Modalzinho) */}
-      {isOpen && (
-        <div className="absolute top-20 left-4 right-4 bg-[#1a1a1a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl pointer-events-auto overflow-hidden md:hidden z-40">
-          <nav className="flex flex-col p-4 gap-2">
-            {navItems.map(({ id, label, icon: Icon }) => (
-              <button
-                key={id}
-                onClick={() => scrollToSection(id)}
-                className={cn(
-                  "flex items-center gap-4 px-4 py-3 rounded-xl transition-all text-left font-medium",
-                  activeSection === id 
-                    ? "bg-brand-red/10 text-brand-red" 
-                    : "text-gray-300 hover:bg-white/5"
-                )}
-              >
-                <Icon size={20} className={activeSection === id ? "text-brand-red" : ""} />
-                {label}
-              </button>
-            ))}
-          </nav>
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute top-20 left-4 right-4 bg-[#1a1a1a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl pointer-events-auto overflow-hidden md:hidden z-40"
+          >
+            <nav className="flex flex-col p-4 gap-2">
+              {navItems.map(({ id, label, icon: Icon }) => (
+                <button
+                  key={id}
+                  onClick={() => scrollToSection(id)}
+                  className={cn(
+                    "flex items-center gap-4 px-4 py-3 rounded-xl transition-all text-left font-medium",
+                    activeSection === id 
+                      ? "bg-brand-red/10 text-brand-red" 
+                      : "text-gray-300 hover:bg-white/5"
+                  )}
+                >
+                  <Icon size={20} className={activeSection === id ? "text-brand-red" : ""} />
+                  {label}
+                </button>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
